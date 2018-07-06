@@ -1,0 +1,9 @@
+hass启动homeassistant异常
+错误日志：2018-07-06 16:34:45 ERROR (Thread-5) [homeassistant.util.package] Unable to install package netdisco==1.4.1: Command ""d:\program files\python\python35\python.exe" -u -c "import setuptools, tokenize;__file__='C:\\Users\\15262\\AppData\\Local\\Temp\\pip-install-3elbqz55\\netifaces\\setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record C:\Users\15262\AppData\Local\Temp\pip-record-b_msd1yo\install-record.txt --single-version-externally-managed --compile --user --prefix=" failed with error code 1 in C:\Users\15262\AppData\Local\Temp\pip-install-3elbqz55\netifaces\
+
+解决：
+Netifaces安装：（安装包地址：https://www.lfd.uci.edu/~gohlke/pythonlibs/）
+64位：
+    pip install https://download.lfd.uci.edu/pythonlibs/t5ulg2xd/netifaces-0.10.7-cp35-cp35m-win_amd64.whl
+32位：
+    pip instal https://download.lfd.uci.edu/pythonlibs/t5ulg2xd/netifaces-0.10.7-cp35-cp35m-win32.whl
