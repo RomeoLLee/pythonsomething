@@ -9,7 +9,10 @@ future: 代表将来执行或没有执行的任务的结果。它和task上没�
 
 async/await 关键字：python3.5用于定义协程的关键字，async定义一个协程，await用于挂起阻塞的异步调用接口。
 '''
-
+'''
+此例是个并发例子，三个协程coroutine1，coroutine2，coroutine3,单独处理分别需要1s,2s,4s。
+而使用asyncio只需要4s。
+'''
 
 import asyncio
 import time
@@ -17,26 +20,26 @@ import time
 now = lambda :time.time()
 
 async def do_some_work(x):
-    print("waiting:",x)
-    # await 后面就是调用耗时的操作
+    print("Waiting:",x)
     await asyncio.sleep(x)
     return "Done after {}s".format(x)
 
-async def other():
-    print("other")
-
 start = now()
 
-coroutine = do_some_work(2)
-corutine2 = other()
-#  创建一个事件loop
-loop = asyncio.get_event_loop()
-创建任务task和task2
-task = asyncio.ensure_future(coroutine)
-task2 = asyncio.ensure_future(corutine2)
-# 将task加入到事件循环loop
-loop.run_until_complete(task)
-loop.run_until_complete(task2)
+coroutine1 = do_some_work(1)
+coroutine2 = do_some_work(2)
+coroutine3 = do_some_work(4)
 
-print("Task ret:", task.result())
-print("Time:", now() - start)
+tasks = [
+    asyncio.ensure_future(coroutine1),
+    asyncio.ensure_future(coroutine2),
+    asyncio.ensure_future(coroutine3)
+]
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(asyncio.wait(tasks))
+
+for task in tasks:
+    print("Task ret:",task.result())
+
+print("Time:",now()-start)
